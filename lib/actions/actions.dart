@@ -37,7 +37,17 @@ Future historico(
       }
     }()}${nomeResponsavelAtual}',
     'fk_id_responsavel': fkidResponsavelAtual,
+    'fk_id_status': fkidStatus,
   });
+  await SsaTable().update(
+    data: {
+      'fk_id_status': fkidStatus,
+    },
+    matchingRows: (rows) => rows.eqOrNull(
+      'id_ssa',
+      FFAppState().stateSSAcompleta.fkIdSsa,
+    ),
+  );
 }
 
 Future querySSAcompleta(
@@ -215,7 +225,7 @@ Future querySSAcompleta(
           (e) => e
             ..updateVtTrecho(
               (e) => e.add(FmTrechoStruct(
-                fkId: valueOrDefault<int>(
+                id: valueOrDefault<int>(
                   getJsonField(
                     currentLoop2Item,
                     r'''$["fk_id"]''',
@@ -283,7 +293,7 @@ Future querySSAcompleta(
           (e) => e
             ..updateVtNivelPiso(
               (e) => e.add(FmPisoStruct(
-                fkId: valueOrDefault<int>(
+                id: valueOrDefault<int>(
                   getJsonField(
                     currentLoop3Item,
                     r'''$["fk_id"]''',
@@ -348,7 +358,7 @@ Future querySSAcompleta(
           (e) => e
             ..updateVtItensSelecionadoFm(
               (e) => e.add(FmItensSelecionadosStruct(
-                idSelecao: valueOrDefault<int>(
+                id: valueOrDefault<int>(
                   getJsonField(
                     currentLoop4Item,
                     r'''$["id_selecao"]''',
@@ -534,28 +544,27 @@ Future querySSAcompleta(
   await Future.wait([
     Future(() async {
       for (int loop9Index = 0;
-          loop9Index <
-              outSSAcompleto!
-                  .map((e) => e.execucaoTrechos)
-                  .withoutNulls
-                  .toList()
-                  .length;
+          loop9Index < outSSAcompleto!.firstOrNull!.execucaoTrechos!.length;
           loop9Index++) {
-        final currentLoop9Item = outSSAcompleto
-            .map((e) => e.execucaoTrechos)
-            .withoutNulls
-            .toList()[loop9Index];
+        final currentLoop9Item =
+            outSSAcompleto.firstOrNull!.execucaoTrechos![loop9Index];
         FFAppState().updateStateSSAcompletaStruct(
           (e) => e
             ..updateExTrecho(
               (e) => e.add(FmTrechoStruct(
-                fkId: getJsonField(
-                  currentLoop9Item,
-                  r'''$["id"]''',
+                id: valueOrDefault<int>(
+                  getJsonField(
+                    currentLoop9Item,
+                    r'''$["id"]''',
+                  ),
+                  0,
                 ),
-                fkInterno: getJsonField(
-                  currentLoop9Item,
-                  r'''$["id"]''',
+                fkInterno: valueOrDefault<int>(
+                  getJsonField(
+                    currentLoop9Item,
+                    r'''$["id"]''',
+                  ),
+                  0,
                 ),
                 trecho: getJsonField(
                   currentLoop9Item,
@@ -592,22 +601,15 @@ Future querySSAcompleta(
     }),
     Future(() async {
       for (int loop10Index = 0;
-          loop10Index <
-              outSSAcompleto!
-                  .map((e) => e.execucaoPisos)
-                  .withoutNulls
-                  .toList()
-                  .length;
+          loop10Index < outSSAcompleto!.firstOrNull!.execucaoPisos!.length;
           loop10Index++) {
-        final currentLoop10Item = outSSAcompleto
-            .map((e) => e.execucaoPisos)
-            .withoutNulls
-            .toList()[loop10Index];
+        final currentLoop10Item =
+            outSSAcompleto.firstOrNull!.execucaoPisos![loop10Index];
         FFAppState().updateStateSSAcompletaStruct(
           (e) => e
             ..updateExPiso(
               (e) => e.add(FmPisoStruct(
-                fkId: getJsonField(
+                id: getJsonField(
                   currentLoop10Item,
                   r'''$["id"]''',
                 ),
@@ -646,24 +648,17 @@ Future querySSAcompleta(
     }),
     Future(() async {
       for (int loop11Index = 0;
-          loop11Index <
-              outSSAcompleto!
-                  .map((e) => e.execucaoEquipe)
-                  .withoutNulls
-                  .toList()
-                  .length;
+          loop11Index < outSSAcompleto!.firstOrNull!.execucaoEquipe!.length;
           loop11Index++) {
-        final currentLoop11Item = outSSAcompleto
-            .map((e) => e.execucaoEquipe)
-            .withoutNulls
-            .toList()[loop11Index];
+        final currentLoop11Item =
+            outSSAcompleto.firstOrNull!.execucaoEquipe![loop11Index];
         FFAppState().updateStateSSAcompletaStruct(
           (e) => e
             ..updateExDadosEfetivo(
               (e) => e.add(FmDadosEfetivoStruct(
                 fkIdUser: getJsonField(
                   currentLoop11Item,
-                  r'''$["id"]''',
+                  r'''$["funcionario_ref"]''',
                 ),
                 fkInterno: getJsonField(
                   currentLoop11Item,
@@ -689,6 +684,10 @@ Future querySSAcompleta(
                   currentLoop11Item,
                   r'''$["hora_fim"]''',
                 ).toString()),
+                id: getJsonField(
+                  currentLoop11Item,
+                  r'''$["id"]''',
+                ),
               )),
             ),
         );
@@ -696,17 +695,10 @@ Future querySSAcompleta(
     }),
     Future(() async {
       for (int loop12Index = 0;
-          loop12Index <
-              outSSAcompleto!
-                  .map((e) => e.execucaoListaPecas)
-                  .withoutNulls
-                  .toList()
-                  .length;
+          loop12Index < outSSAcompleto!.firstOrNull!.execucaoListaPecas!.length;
           loop12Index++) {
-        final currentLoop12Item = outSSAcompleto
-            .map((e) => e.execucaoListaPecas)
-            .withoutNulls
-            .toList()[loop12Index];
+        final currentLoop12Item =
+            outSSAcompleto.firstOrNull!.execucaoListaPecas![loop12Index];
         FFAppState().updateStateSSAcompletaStruct(
           (e) => e
             ..updateExListaPecas(
@@ -751,21 +743,15 @@ Future querySSAcompleta(
     Future(() async {
       for (int loop13Index = 0;
           loop13Index <
-              outSSAcompleto!
-                  .map((e) => e.execucaoInterferencias)
-                  .withoutNulls
-                  .toList()
-                  .length;
+              outSSAcompleto!.firstOrNull!.execucaoInterferencias!.length;
           loop13Index++) {
-        final currentLoop13Item = outSSAcompleto
-            .map((e) => e.execucaoInterferencias)
-            .withoutNulls
-            .toList()[loop13Index];
+        final currentLoop13Item =
+            outSSAcompleto.firstOrNull!.execucaoInterferencias![loop13Index];
         FFAppState().updateStateSSAcompletaStruct(
           (e) => e
             ..updateExInterferencias(
               (e) => e.add(FmInterferenciaExecucaoStruct(
-                idInterferencia: getJsonField(
+                id: getJsonField(
                   currentLoop13Item,
                   r'''$["id"]''',
                 ),
@@ -801,21 +787,15 @@ Future querySSAcompleta(
     Future(() async {
       for (int loop14Index = 0;
           loop14Index <
-              outSSAcompleto!
-                  .map((e) => e.execucaoMontagemDiaria)
-                  .withoutNulls
-                  .toList()
-                  .length;
+              outSSAcompleto!.firstOrNull!.execucaoMontagemDiaria!.length;
           loop14Index++) {
-        final currentLoop14Item = outSSAcompleto
-            .map((e) => e.execucaoMontagemDiaria)
-            .withoutNulls
-            .toList()[loop14Index];
+        final currentLoop14Item =
+            outSSAcompleto.firstOrNull!.execucaoMontagemDiaria![loop14Index];
         FFAppState().updateStateSSAcompletaStruct(
           (e) => e
             ..updateExPreenchimentoDiariaMontagem(
               (e) => e.add(FmPreenchimentoExecucaoStruct(
-                idPreenchimento: getJsonField(
+                id: getJsonField(
                   currentLoop14Item,
                   r'''$["id_execucao_diaria"]''',
                 ),
@@ -863,3 +843,18 @@ Future querySSAcompleta(
     }),
   ]);
 }
+
+Future qdetailsVisitaTecnica(
+  BuildContext context, {
+  required int? fkid,
+}) async {}
+
+Future qdetailsProgramacao(
+  BuildContext context, {
+  required int? fkid,
+}) async {}
+
+Future qdetailsExecucao(
+  BuildContext context, {
+  required int? fkid,
+}) async {}

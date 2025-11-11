@@ -36,4 +36,8 @@ class EquipeExecucaoRow extends SupabaseDataRow {
 
   double? get horasTotais => getField<double>('horas_totais');
   set horasTotais(double? value) => setField<double>('horas_totais', value);
+
+  int? get preenchimentoDiarioFk => getField<int>('preenchimento_diario_fk');
+  set preenchimentoDiarioFk(int? value) =>
+      setField<int>('preenchimento_diario_fk', value);
 }

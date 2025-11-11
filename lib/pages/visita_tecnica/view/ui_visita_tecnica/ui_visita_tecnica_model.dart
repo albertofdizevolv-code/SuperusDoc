@@ -39,7 +39,7 @@ class UiVisitaTecnicaModel extends FlutterFlowModel<UiVisitaTecnicaWidget> {
   late CroquiModel croquiModel;
   bool isDataUploading_croquiUploadData023 = false;
   FFUploadedFile uploadedLocalFile_croquiUploadData023 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   // Model for Comp_EspecificacoesSPIQ component.
   late CompEspecificacoesSPIQModel compEspecificacoesSPIQModel;
@@ -117,20 +117,30 @@ class UiVisitaTecnicaModel extends FlutterFlowModel<UiVisitaTecnicaWidget> {
     while (FFAppState().stateSSAcompleta.vtNivelPiso.length >= 1) {
       await PisosTable().insert({
         'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
-        'nivel':
-            FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.nivelPiso,
-        'elevacao':
-            FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.elevacao,
-        'comp':
-            FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.comprimento,
-        'larg': FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.largura,
-        'area_descontar': FFAppState()
-            .stateSSAcompleta
-            .vtNivelPiso
-            .firstOrNull
-            ?.areaDescontar,
-        'area_nivel':
-            FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.areaNivel,
+        'nivel': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.nivelPiso,
+          0.0,
+        ),
+        'elevacao': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.elevacao,
+          0.0,
+        ),
+        'comp': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.comprimento,
+          0.0,
+        ),
+        'larg': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.largura,
+          0.0,
+        ),
+        'area_descontar': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.areaDescontar,
+          0.0,
+        ),
+        'area_nivel': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtNivelPiso.firstOrNull?.areaNivel,
+          0.0,
+        ),
         'visita_tec_ref': fkVisitaTecnica,
       });
       FFAppState().updateStateSSAcompletaStruct(
@@ -173,14 +183,34 @@ class UiVisitaTecnicaModel extends FlutterFlowModel<UiVisitaTecnicaWidget> {
       await TrechosTable().insert({
         'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
         'visita_tec_ref': fkVisitaTecnica,
-        'trecho': FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.trecho,
-        'tipo': FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.tipoTrecho,
-        'comp': FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.comprimento,
-        'alt': FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.altura,
-        'larg': FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.largura,
-        'v_desc': FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.descontar,
-        'v_total':
-            FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.volumeTotal,
+        'trecho': valueOrDefault<String>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.trecho,
+          '0',
+        ),
+        'tipo': valueOrDefault<String>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.tipoTrecho,
+          '0',
+        ),
+        'comp': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.comprimento,
+          0.0,
+        ),
+        'alt': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.altura,
+          0.0,
+        ),
+        'larg': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.largura,
+          0.0,
+        ),
+        'v_desc': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.descontar,
+          0.0,
+        ),
+        'v_total': valueOrDefault<double>(
+          FFAppState().stateSSAcompleta.vtTrecho.firstOrNull?.volumeTotal,
+          0.0,
+        ),
       });
       FFAppState().updateStateSSAcompletaStruct(
         (e) => e
@@ -221,10 +251,14 @@ class UiVisitaTecnicaModel extends FlutterFlowModel<UiVisitaTecnicaWidget> {
       await ListaPecasVTTable().insert({
         'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
         'visitaTec': fkVisitaTecnica,
-        'quantidadePrevista':
-            FFAppState().stateSSAcompleta.vtListaPecas.firstOrNull?.quantidade,
-        'Material':
-            FFAppState().stateSSAcompleta.vtListaPecas.firstOrNull?.idMaterial,
+        'quantidadePrevista': valueOrDefault<int>(
+          FFAppState().stateSSAcompleta.vtListaPecas.firstOrNull?.quantidade,
+          0,
+        ),
+        'Material': valueOrDefault<int>(
+          FFAppState().stateSSAcompleta.vtListaPecas.firstOrNull?.idMaterial,
+          0,
+        ),
       });
       FFAppState().updateStateSSAcompletaStruct(
         (e) => e

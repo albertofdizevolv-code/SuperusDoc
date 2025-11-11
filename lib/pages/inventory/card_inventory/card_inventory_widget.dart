@@ -2,6 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'card_inventory_model.dart';
@@ -752,8 +753,10 @@ class _CardInventoryWidgetState extends State<CardInventoryWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      await actions.getPdfHistorico(
+                        widget.historicoSSA!.toList(),
+                      );
                     },
                     text: 'Gerar PDF',
                     options: FFButtonOptions(

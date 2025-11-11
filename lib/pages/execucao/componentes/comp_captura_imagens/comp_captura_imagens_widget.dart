@@ -219,6 +219,8 @@ class _CompCapturaImagensWidgetState extends State<CompCapturaImagensWidget> {
                                               height: m.dimensions?.height,
                                               width: m.dimensions?.width,
                                               blurHash: m.blurHash,
+                                              originalFilename:
+                                                  m.originalFilename,
                                             ))
                                         .toList();
                                   } finally {

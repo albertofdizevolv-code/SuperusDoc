@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class FmPisoStruct extends BaseStruct {
   FmPisoStruct({
-    int? fkId,
+    int? id,
     int? fkInterno,
 
     /// cadastrar nivel
@@ -25,7 +25,7 @@ class FmPisoStruct extends BaseStruct {
     /// cadastrar nivel
     double? areaDescontar,
     double? areaNivel,
-  })  : _fkId = fkId,
+  })  : _id = id,
         _fkInterno = fkInterno,
         _nivelPiso = nivelPiso,
         _elevacao = elevacao,
@@ -34,14 +34,14 @@ class FmPisoStruct extends BaseStruct {
         _areaDescontar = areaDescontar,
         _areaNivel = areaNivel;
 
-  // "fk_id" field.
-  int? _fkId;
-  int get fkId => _fkId ?? 0;
-  set fkId(int? val) => _fkId = val;
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
-  void incrementFkId(int amount) => fkId = fkId + amount;
+  void incrementId(int amount) => id = id + amount;
 
-  bool hasFkId() => _fkId != null;
+  bool hasId() => _id != null;
 
   // "fk_interno" field.
   int? _fkInterno;
@@ -109,7 +109,7 @@ class FmPisoStruct extends BaseStruct {
   bool hasAreaNivel() => _areaNivel != null;
 
   static FmPisoStruct fromMap(Map<String, dynamic> data) => FmPisoStruct(
-        fkId: castToType<int>(data['fk_id']),
+        id: castToType<int>(data['id']),
         fkInterno: castToType<int>(data['fk_interno']),
         nivelPiso: castToType<double>(data['nivel_Piso']),
         elevacao: castToType<double>(data['elevacao']),
@@ -123,7 +123,7 @@ class FmPisoStruct extends BaseStruct {
       data is Map ? FmPisoStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        'fk_id': _fkId,
+        'id': _id,
         'fk_interno': _fkInterno,
         'nivel_Piso': _nivelPiso,
         'elevacao': _elevacao,
@@ -135,8 +135,8 @@ class FmPisoStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'fk_id': serializeParam(
-          _fkId,
+        'id': serializeParam(
+          _id,
           ParamType.int,
         ),
         'fk_interno': serializeParam(
@@ -171,8 +171,8 @@ class FmPisoStruct extends BaseStruct {
 
   static FmPisoStruct fromSerializableMap(Map<String, dynamic> data) =>
       FmPisoStruct(
-        fkId: deserializeParam(
-          data['fk_id'],
+        id: deserializeParam(
+          data['id'],
           ParamType.int,
           false,
         ),
@@ -219,7 +219,7 @@ class FmPisoStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is FmPisoStruct &&
-        fkId == other.fkId &&
+        id == other.id &&
         fkInterno == other.fkInterno &&
         nivelPiso == other.nivelPiso &&
         elevacao == other.elevacao &&
@@ -231,7 +231,7 @@ class FmPisoStruct extends BaseStruct {
 
   @override
   int get hashCode => const ListEquality().hash([
-        fkId,
+        id,
         fkInterno,
         nivelPiso,
         elevacao,
@@ -243,7 +243,7 @@ class FmPisoStruct extends BaseStruct {
 }
 
 FmPisoStruct createFmPisoStruct({
-  int? fkId,
+  int? id,
   int? fkInterno,
   double? nivelPiso,
   double? elevacao,
@@ -253,7 +253,7 @@ FmPisoStruct createFmPisoStruct({
   double? areaNivel,
 }) =>
     FmPisoStruct(
-      fkId: fkId,
+      id: id,
       fkInterno: fkInterno,
       nivelPiso: nivelPiso,
       elevacao: elevacao,

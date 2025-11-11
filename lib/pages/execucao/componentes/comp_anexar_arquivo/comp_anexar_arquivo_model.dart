@@ -7,7 +7,7 @@ class CompAnexarArquivoModel extends FlutterFlowModel<CompAnexarArquivoWidget> {
 
   bool isDataUploading_uploadDataClq = false;
   FFUploadedFile uploadedLocalFile_uploadDataClq =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
 
   @override
   void initState(BuildContext context) {}

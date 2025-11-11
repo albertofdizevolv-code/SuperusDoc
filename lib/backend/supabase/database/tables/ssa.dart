@@ -83,4 +83,7 @@ class SsaRow extends SupabaseDataRow {
   String? get codIdentificador => getField<String>('cod_identificador');
   set codIdentificador(String? value) =>
       setField<String>('cod_identificador', value);
+
+  DateTime? get createdAt => getField<DateTime>('created_at');
+  set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
 }

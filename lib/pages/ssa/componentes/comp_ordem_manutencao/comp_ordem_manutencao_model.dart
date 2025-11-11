@@ -1,4 +1,3 @@
-import '/backend/supabase/supabase.dart';
 import '/components/text_field_static_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
@@ -9,8 +8,6 @@ class CompOrdemManutencaoModel
     extends FlutterFlowModel<CompOrdemManutencaoWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // Stores action output result for [Backend Call - Query Rows] action in comp_OrdemManutencao widget.
-  List<SolicitanteRow>? outSolicitante;
   // Model for textFieldStatic component.
   late TextFieldStaticModel textFieldStaticModel1;
   // State field(s) for clienteSolicitante widget.

@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class FmTrechoStruct extends BaseStruct {
   FmTrechoStruct({
-    int? fkId,
+    int? id,
     int? fkInterno,
 
     /// cadastrar trecho
@@ -26,7 +26,7 @@ class FmTrechoStruct extends BaseStruct {
     double? largura,
     double? descontar,
     double? volumeTotal,
-  })  : _fkId = fkId,
+  })  : _id = id,
         _fkInterno = fkInterno,
         _trecho = trecho,
         _tipoTrecho = tipoTrecho,
@@ -36,14 +36,14 @@ class FmTrechoStruct extends BaseStruct {
         _descontar = descontar,
         _volumeTotal = volumeTotal;
 
-  // "fk_id" field.
-  int? _fkId;
-  int get fkId => _fkId ?? 0;
-  set fkId(int? val) => _fkId = val;
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
-  void incrementFkId(int amount) => fkId = fkId + amount;
+  void incrementId(int amount) => id = id + amount;
 
-  bool hasFkId() => _fkId != null;
+  bool hasId() => _id != null;
 
   // "fk_interno" field.
   int? _fkInterno;
@@ -116,7 +116,7 @@ class FmTrechoStruct extends BaseStruct {
   bool hasVolumeTotal() => _volumeTotal != null;
 
   static FmTrechoStruct fromMap(Map<String, dynamic> data) => FmTrechoStruct(
-        fkId: castToType<int>(data['fk_id']),
+        id: castToType<int>(data['id']),
         fkInterno: castToType<int>(data['fk_interno']),
         trecho: data['trecho'] as String?,
         tipoTrecho: data['tipo_trecho'] as String?,
@@ -131,7 +131,7 @@ class FmTrechoStruct extends BaseStruct {
       data is Map ? FmTrechoStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        'fk_id': _fkId,
+        'id': _id,
         'fk_interno': _fkInterno,
         'trecho': _trecho,
         'tipo_trecho': _tipoTrecho,
@@ -144,8 +144,8 @@ class FmTrechoStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'fk_id': serializeParam(
-          _fkId,
+        'id': serializeParam(
+          _id,
           ParamType.int,
         ),
         'fk_interno': serializeParam(
@@ -184,8 +184,8 @@ class FmTrechoStruct extends BaseStruct {
 
   static FmTrechoStruct fromSerializableMap(Map<String, dynamic> data) =>
       FmTrechoStruct(
-        fkId: deserializeParam(
-          data['fk_id'],
+        id: deserializeParam(
+          data['id'],
           ParamType.int,
           false,
         ),
@@ -237,7 +237,7 @@ class FmTrechoStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is FmTrechoStruct &&
-        fkId == other.fkId &&
+        id == other.id &&
         fkInterno == other.fkInterno &&
         trecho == other.trecho &&
         tipoTrecho == other.tipoTrecho &&
@@ -250,7 +250,7 @@ class FmTrechoStruct extends BaseStruct {
 
   @override
   int get hashCode => const ListEquality().hash([
-        fkId,
+        id,
         fkInterno,
         trecho,
         tipoTrecho,
@@ -263,7 +263,7 @@ class FmTrechoStruct extends BaseStruct {
 }
 
 FmTrechoStruct createFmTrechoStruct({
-  int? fkId,
+  int? id,
   int? fkInterno,
   String? trecho,
   String? tipoTrecho,
@@ -274,7 +274,7 @@ FmTrechoStruct createFmTrechoStruct({
   double? volumeTotal,
 }) =>
     FmTrechoStruct(
-      fkId: fkId,
+      id: id,
       fkInterno: fkInterno,
       trecho: trecho,
       tipoTrecho: tipoTrecho,

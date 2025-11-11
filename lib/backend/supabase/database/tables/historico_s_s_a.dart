@@ -28,4 +28,7 @@ class HistoricoSSARow extends SupabaseDataRow {
 
   int get fkIdResponsavel => getField<int>('fk_id_responsavel')!;
   set fkIdResponsavel(int value) => setField<int>('fk_id_responsavel', value);
+
+  int? get fkIdStatus => getField<int>('fk_id_status');
+  set fkIdStatus(int? value) => setField<int>('fk_id_status', value);
 }

@@ -1,5 +1,6 @@
 import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/execucao/componentes/comp_anexar_arquivo/comp_anexar_arquivo_widget.dart';
 import '/pages/execucao/componentes/comp_captura_imagens/comp_captura_imagens_widget.dart';
@@ -136,6 +137,10 @@ class UIFormPreenchimentoModel
   late CompCapturaImagensModel compCapturaImagensDepoisModel;
   // Model for comp_anexar_arquivo component.
   late CompAnexarArquivoModel compAnexarArquivoModel;
+  // Stores action output result for [Backend Call - Insert Row] action in create widget.
+  ExecucaoRow? outNewExecucao;
+  // Stores action output result for [Backend Call - Insert Row] action in create widget.
+  ExecucaoMontagemDiariaRow? outMontagemDiario;
 
   @override
   void initState(BuildContext context) {
@@ -214,6 +219,18 @@ class UIFormPreenchimentoModel
               )),
             ),
         );
+        await TrechosExecucaoTable().insert({
+          'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
+          'trecho': currentLoop1Item.trecho,
+          'tipo': currentLoop1Item.tipoTrecho,
+          'comp': currentLoop1Item.comprimento,
+          'alt': currentLoop1Item.altura,
+          'larg': currentLoop1Item.largura,
+          'v_desc': currentLoop1Item.descontar,
+          'v_total': currentLoop1Item.volumeTotal,
+          'execucao_ref': outNewExecucao?.idExecucao,
+          'preenchimento_diario_fk': outMontagemDiario?.idExecucaoDiaria,
+        });
       }
     } else if (typemodeInBlock == WidgetTypeMode.edit) {
     } else if (typemodeInBlock == WidgetTypeMode.view) {
@@ -272,6 +289,17 @@ class UIFormPreenchimentoModel
               )),
             ),
         );
+        await PisosExecucaoTable().insert({
+          'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
+          'nivel': currentLoop1Item.nivelPiso,
+          'elevacao': currentLoop1Item.elevacao,
+          'comp': currentLoop1Item.comprimento,
+          'larg': currentLoop1Item.largura,
+          'area_descontar': currentLoop1Item.areaDescontar,
+          'area_nivel': currentLoop1Item.areaNivel,
+          'execucao_ref': FFAppState().stateSSAcompleta.fkIdExecucao,
+          'preenchimento_diario_fk': outMontagemDiario?.idExecucaoDiaria,
+        });
       }
     } else if (typemodeInBlock == WidgetTypeMode.edit) {
     } else if (typemodeInBlock == WidgetTypeMode.view) {
@@ -328,6 +356,17 @@ class UIFormPreenchimentoModel
               )),
             ),
         );
+        await EquipeExecucaoTable().insert({
+          'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
+          'execucao_ref': FFAppState().stateSSAcompleta.fkIdExecucao,
+          'funcionario_ref': currentLoop1Item.fkIdUser,
+          'hora_inicio': supaSerialize<PostgresTime>(
+              PostgresTime(currentLoop1Item.horarioInicio)),
+          'hora_fim': supaSerialize<PostgresTime>(
+              PostgresTime(currentLoop1Item.horaTermino)),
+          'horas_totais': currentLoop1Item.horasTotais,
+          'preenchimento_diario_fk': outMontagemDiario?.idExecucaoDiaria,
+        });
       }
     } else if (typemodeInBlock == WidgetTypeMode.edit) {
     } else if (typemodeInBlock == WidgetTypeMode.view) {
@@ -393,6 +432,13 @@ class UIFormPreenchimentoModel
               )),
             ),
         );
+        await ListaPecasExecucaoTable().insert({
+          'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
+          'execucao_ref': FFAppState().stateSSAcompleta.fkIdExecucao,
+          'material_ref': currentLoop1Item.idMaterial,
+          'quantidade_reservada': currentLoop1Item.quantidade,
+          'preenchimento_diario_fk': outMontagemDiario?.idExecucaoDiaria,
+        });
       }
     } else if (typemodeInBlock == WidgetTypeMode.edit) {
     } else if (typemodeInBlock == WidgetTypeMode.view) {
@@ -453,6 +499,17 @@ class UIFormPreenchimentoModel
               )),
             ),
         );
+        await InterferenciaExecucaoTable().insert({
+          'created_at': supaSerialize<DateTime>(getCurrentTimestamp),
+          'fk_id_execucao': FFAppState().stateSSAcompleta.fkIdExecucao,
+          'data_execucao': supaSerialize<DateTime>(datePicked),
+          'descricao': currentLoop1Item.descricao,
+          'duracao': currentLoop1Item.duracao,
+          'efetivo_afetado': currentLoop1Item.efetivoAfetado,
+          'impacto_hora': currentLoop1Item.impactoHora,
+          'fk_id_motivo': currentLoop1Item.fkMotivo,
+          'preenchimento_diario_fk': outMontagemDiario?.idExecucaoDiaria,
+        });
       }
     } else if (typemodeInBlock == WidgetTypeMode.edit) {
     } else {

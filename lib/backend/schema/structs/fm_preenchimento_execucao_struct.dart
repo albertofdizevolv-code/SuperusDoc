@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class FmPreenchimentoExecucaoStruct extends BaseStruct {
   FmPreenchimentoExecucaoStruct({
-    int? idPreenchimento,
+    int? id,
     int? fkInterno,
     int? fkResponsavel,
     DateTime? dataPreenchimento,
@@ -16,7 +16,8 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
     List<String>? exCapturaFotosAntigas,
     List<String>? exCapturaFotosNovas,
     String? exAssinaturaSuperusUrl,
-  })  : _idPreenchimento = idPreenchimento,
+    bool? salvodb,
+  })  : _id = id,
         _fkInterno = fkInterno,
         _fkResponsavel = fkResponsavel,
         _dataPreenchimento = dataPreenchimento,
@@ -24,17 +25,17 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
         _exArquivosAnexo = exArquivosAnexo,
         _exCapturaFotosAntigas = exCapturaFotosAntigas,
         _exCapturaFotosNovas = exCapturaFotosNovas,
-        _exAssinaturaSuperusUrl = exAssinaturaSuperusUrl;
+        _exAssinaturaSuperusUrl = exAssinaturaSuperusUrl,
+        _salvodb = salvodb;
 
-  // "id_preenchimento" field.
-  int? _idPreenchimento;
-  int get idPreenchimento => _idPreenchimento ?? 0;
-  set idPreenchimento(int? val) => _idPreenchimento = val;
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
-  void incrementIdPreenchimento(int amount) =>
-      idPreenchimento = idPreenchimento + amount;
+  void incrementId(int amount) => id = id + amount;
 
-  bool hasIdPreenchimento() => _idPreenchimento != null;
+  bool hasId() => _id != null;
 
   // "fk_interno" field.
   int? _fkInterno;
@@ -105,9 +106,16 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
 
   bool hasExAssinaturaSuperusUrl() => _exAssinaturaSuperusUrl != null;
 
+  // "salvodb" field.
+  bool? _salvodb;
+  bool get salvodb => _salvodb ?? false;
+  set salvodb(bool? val) => _salvodb = val;
+
+  bool hasSalvodb() => _salvodb != null;
+
   static FmPreenchimentoExecucaoStruct fromMap(Map<String, dynamic> data) =>
       FmPreenchimentoExecucaoStruct(
-        idPreenchimento: castToType<int>(data['id_preenchimento']),
+        id: castToType<int>(data['id']),
         fkInterno: castToType<int>(data['fk_interno']),
         fkResponsavel: castToType<int>(data['fk_responsavel']),
         dataPreenchimento: data['data_preenchimento'] as DateTime?,
@@ -116,6 +124,7 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
         exCapturaFotosAntigas: getDataList(data['ex_captura_Fotos_antigas']),
         exCapturaFotosNovas: getDataList(data['ex_captura_Fotos_novas']),
         exAssinaturaSuperusUrl: data['ex_assinatura_superus_url'] as String?,
+        salvodb: data['salvodb'] as bool?,
       );
 
   static FmPreenchimentoExecucaoStruct? maybeFromMap(dynamic data) =>
@@ -124,7 +133,7 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
           : null;
 
   Map<String, dynamic> toMap() => {
-        'id_preenchimento': _idPreenchimento,
+        'id': _id,
         'fk_interno': _fkInterno,
         'fk_responsavel': _fkResponsavel,
         'data_preenchimento': _dataPreenchimento,
@@ -133,12 +142,13 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
         'ex_captura_Fotos_antigas': _exCapturaFotosAntigas,
         'ex_captura_Fotos_novas': _exCapturaFotosNovas,
         'ex_assinatura_superus_url': _exAssinaturaSuperusUrl,
+        'salvodb': _salvodb,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'id_preenchimento': serializeParam(
-          _idPreenchimento,
+        'id': serializeParam(
+          _id,
           ParamType.int,
         ),
         'fk_interno': serializeParam(
@@ -175,13 +185,17 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
           _exAssinaturaSuperusUrl,
           ParamType.String,
         ),
+        'salvodb': serializeParam(
+          _salvodb,
+          ParamType.bool,
+        ),
       }.withoutNulls;
 
   static FmPreenchimentoExecucaoStruct fromSerializableMap(
           Map<String, dynamic> data) =>
       FmPreenchimentoExecucaoStruct(
-        idPreenchimento: deserializeParam(
-          data['id_preenchimento'],
+        id: deserializeParam(
+          data['id'],
           ParamType.int,
           false,
         ),
@@ -225,6 +239,11 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        salvodb: deserializeParam(
+          data['salvodb'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -234,7 +253,7 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
   bool operator ==(Object other) {
     const listEquality = ListEquality();
     return other is FmPreenchimentoExecucaoStruct &&
-        idPreenchimento == other.idPreenchimento &&
+        id == other.id &&
         fkInterno == other.fkInterno &&
         fkResponsavel == other.fkResponsavel &&
         dataPreenchimento == other.dataPreenchimento &&
@@ -243,12 +262,13 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
         listEquality.equals(
             exCapturaFotosAntigas, other.exCapturaFotosAntigas) &&
         listEquality.equals(exCapturaFotosNovas, other.exCapturaFotosNovas) &&
-        exAssinaturaSuperusUrl == other.exAssinaturaSuperusUrl;
+        exAssinaturaSuperusUrl == other.exAssinaturaSuperusUrl &&
+        salvodb == other.salvodb;
   }
 
   @override
   int get hashCode => const ListEquality().hash([
-        idPreenchimento,
+        id,
         fkInterno,
         fkResponsavel,
         dataPreenchimento,
@@ -256,25 +276,28 @@ class FmPreenchimentoExecucaoStruct extends BaseStruct {
         exArquivosAnexo,
         exCapturaFotosAntigas,
         exCapturaFotosNovas,
-        exAssinaturaSuperusUrl
+        exAssinaturaSuperusUrl,
+        salvodb
       ]);
 }
 
 FmPreenchimentoExecucaoStruct createFmPreenchimentoExecucaoStruct({
-  int? idPreenchimento,
+  int? id,
   int? fkInterno,
   int? fkResponsavel,
   DateTime? dataPreenchimento,
   String? exCondicoesObs,
   String? exArquivosAnexo,
   String? exAssinaturaSuperusUrl,
+  bool? salvodb,
 }) =>
     FmPreenchimentoExecucaoStruct(
-      idPreenchimento: idPreenchimento,
+      id: id,
       fkInterno: fkInterno,
       fkResponsavel: fkResponsavel,
       dataPreenchimento: dataPreenchimento,
       exCondicoesObs: exCondicoesObs,
       exArquivosAnexo: exArquivosAnexo,
       exAssinaturaSuperusUrl: exAssinaturaSuperusUrl,
+      salvodb: salvodb,
     );

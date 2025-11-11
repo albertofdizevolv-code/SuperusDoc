@@ -14,11 +14,13 @@ class CompMontagemWidget extends StatefulWidget {
     required this.idinterno,
     required this.index,
     required this.detailsAction,
+    required this.deleteAction,
   });
 
   final int? idinterno;
   final int? index;
   final Future Function()? detailsAction;
+  final Future Function()? deleteAction;
 
   @override
   State<CompMontagemWidget> createState() => _CompMontagemWidgetState();
@@ -118,19 +120,7 @@ class _CompMontagemWidgetState extends State<CompMontagemWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                FFAppState().updateStateSSAcompletaStruct(
-                                  (e) => e
-                                    ..updateExPreenchimentoDiariaMontagem(
-                                      (e) => e.remove(FFAppState()
-                                          .stateSSAcompleta
-                                          .exPreenchimentoDiariaMontagem
-                                          .where((e) =>
-                                              e.fkInterno == widget.idinterno)
-                                          .toList()
-                                          .firstOrNull),
-                                    ),
-                                );
-                                _model.updatePage(() {});
+                                await widget.deleteAction?.call();
                               },
                               text: 'Remover formulário',
                               icon: Icon(

@@ -543,9 +543,12 @@ class _CompFormWidgetState extends State<CompFormWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  FFAppState()
-                                      .stateSSAcompleta
-                                      .prNomeResponsavelExecucao,
+                                  valueOrDefault<String>(
+                                    FFAppState()
+                                        .stateSSAcompleta
+                                        .prNomeResponsavelExecucao,
+                                    'ERRO AQUI',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -624,9 +627,12 @@ class _CompFormWidgetState extends State<CompFormWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  FFAppState()
-                                      .stateSSAcompleta
-                                      .ssaNomeSolicitante,
+                                  valueOrDefault<String>(
+                                    FFAppState()
+                                        .stateSSAcompleta
+                                        .ssaNomeSolicitante,
+                                    'OU AQUI',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(

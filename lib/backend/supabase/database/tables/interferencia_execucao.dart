@@ -22,9 +22,6 @@ class InterferenciaExecucaoRow extends SupabaseDataRow {
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  int? get fkIdSsa => getField<int>('fk_id_ssa');
-  set fkIdSsa(int? value) => setField<int>('fk_id_ssa', value);
-
   int? get fkIdExecucao => getField<int>('fk_id_execucao');
   set fkIdExecucao(int? value) => setField<int>('fk_id_execucao', value);
 
@@ -46,4 +43,8 @@ class InterferenciaExecucaoRow extends SupabaseDataRow {
 
   int? get fkIdMotivo => getField<int>('fk_id_motivo');
   set fkIdMotivo(int? value) => setField<int>('fk_id_motivo', value);
+
+  int? get preenchimentoDiarioFk => getField<int>('preenchimento_diario_fk');
+  set preenchimentoDiarioFk(int? value) =>
+      setField<int>('preenchimento_diario_fk', value);
 }

@@ -44,4 +44,8 @@ class TrechosExecucaoRow extends SupabaseDataRow {
 
   int? get execucaoRef => getField<int>('execucao_ref');
   set execucaoRef(int? value) => setField<int>('execucao_ref', value);
+
+  int? get preenchimentoDiarioFk => getField<int>('preenchimento_diario_fk');
+  set preenchimentoDiarioFk(int? value) =>
+      setField<int>('preenchimento_diario_fk', value);
 }

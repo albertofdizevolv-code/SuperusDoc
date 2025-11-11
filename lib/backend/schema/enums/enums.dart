@@ -29,6 +29,7 @@ enum WidgetTypeMode {
   create,
   edit,
   view,
+  delete,
   undefined,
 }
 

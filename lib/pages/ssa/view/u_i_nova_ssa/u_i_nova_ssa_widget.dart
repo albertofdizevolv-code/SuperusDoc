@@ -58,7 +58,7 @@ class _UINovaSsaWidgetState extends State<UINovaSsaWidget> {
     _model.cnpjFocusNode ??= FocusNode();
 
     _model.ssaTextController ??= TextEditingController(
-        text: widget.projeto?.firstOrNull?.codIdentificador);
+        text: '000${widget.projeto?.firstOrNull?.codIdentificador}');
     _model.ssaFocusNode ??= FocusNode();
 
     _model.dataAberturaTextController ??= TextEditingController();

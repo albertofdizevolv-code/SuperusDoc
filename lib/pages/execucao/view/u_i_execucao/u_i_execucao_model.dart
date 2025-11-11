@@ -1,4 +1,3 @@
-import '/backend/supabase/supabase.dart';
 import '/components/tab_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/execucao/componentes/comp_anexar_arquivo/comp_anexar_arquivo_widget.dart';
@@ -43,7 +42,7 @@ class UIExecucaoModel extends FlutterFlowModel<UIExecucaoWidget> {
 
   // Model for comp_areaSSA_execucao component.
   late CompAreaSSAExecucaoModel compAreaSSAExecucaoModel;
-  // Models for comp_montagem dynamic component.
+  // Models for Comp_montagem dynamic component.
   late FlutterFlowDynamicModels<CompMontagemModel> compMontagemModels;
   // Models for tabBar dynamic component.
   late FlutterFlowDynamicModels<TabBarModel> tabBarModels;
@@ -69,8 +68,6 @@ class UIExecucaoModel extends FlutterFlowModel<UIExecucaoWidget> {
   late CompCapturaImagensModel compCapturaImagensModel1;
   // Model for comp_captura_imagens component.
   late CompCapturaImagensModel compCapturaImagensModel2;
-  // Stores action output result for [Backend Call - Insert Row] action in create widget.
-  ExecucaoRow? outNewExecucao;
 
   @override
   void initState(BuildContext context) {

@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'comp_ordem_manutencao_model.dart';
@@ -17,9 +16,11 @@ class CompOrdemManutencaoWidget extends StatefulWidget {
   const CompOrdemManutencaoWidget({
     super.key,
     required this.typeMode,
+    required this.rowSolicitante,
   });
 
   final WidgetTypeMode? typeMode;
+  final List<SolicitanteRow>? rowSolicitante;
 
   @override
   State<CompOrdemManutencaoWidget> createState() =>
@@ -39,18 +40,6 @@ class _CompOrdemManutencaoWidgetState extends State<CompOrdemManutencaoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CompOrdemManutencaoModel());
-
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (widget.typeMode == WidgetTypeMode.edit) {
-        _model.outSolicitante = await SolicitanteTable().queryRows(
-          queryFn: (q) => q.eqOrNull(
-            'projeto_ref',
-            FFAppState().stateSSAcompleta.fkIdProjeto,
-          ),
-        );
-      }
-    });
 
     _model.ordemManutencaoTextController ??= TextEditingController(
         text: FFAppState().stateSSAcompleta.ssaOrdemManutencao);
@@ -218,7 +207,7 @@ class _CompOrdemManutencaoWidgetState extends State<CompOrdemManutencaoWidget> {
                                           .stateSSAcompleta
                                           .ssaNomeSolicitante,
                                 ),
-                                options: _model.outSolicitante!
+                                options: widget.rowSolicitante!
                                     .map((e) => e.nome)
                                     .withoutNulls
                                     .toList(),
@@ -227,10 +216,16 @@ class _CompOrdemManutencaoWidgetState extends State<CompOrdemManutencaoWidget> {
                                       _model.clienteSolicitanteValue = val);
                                   FFAppState().updateStateSSAcompletaStruct(
                                     (e) => e
-                                      ..ssaNomeSolicitante =
-                                          _model.clienteSolicitanteValue
-                                      ..ssaFkIdResponsavel = _model
-                                          .outSolicitante
+                                      ..ssaNomeSolicitante = widget
+                                          .rowSolicitante
+                                          ?.where((e) =>
+                                              e.nome ==
+                                              _model.clienteSolicitanteValue)
+                                          .toList()
+                                          .firstOrNull
+                                          ?.nome
+                                      ..ssaFkIdResponsavel = widget
+                                          .rowSolicitante
                                           ?.where((e) =>
                                               e.nome ==
                                               _model.clienteSolicitanteValue)
@@ -286,9 +281,12 @@ class _CompOrdemManutencaoWidgetState extends State<CompOrdemManutencaoWidget> {
                                 model: _model.textFieldStaticModel2,
                                 updateCallback: () => safeSetState(() {}),
                                 child: TextFieldStaticWidget(
-                                  bodyText: FFAppState()
-                                      .stateSSAcompleta
-                                      .ssaNomeSolicitante,
+                                  bodyText: valueOrDefault<String>(
+                                    FFAppState()
+                                        .stateSSAcompleta
+                                        .ssaNomeSolicitante,
+                                    'nome',
+                                  ),
                                 ),
                               );
                             }
@@ -498,7 +496,7 @@ class _CompOrdemManutencaoWidgetState extends State<CompOrdemManutencaoWidget> {
                                           .stateSSAcompleta
                                           .ssaNomeProgramadorCliente,
                                 ),
-                                options: _model.outSolicitante!
+                                options: widget.rowSolicitante!
                                     .map((e) => e.nome)
                                     .withoutNulls
                                     .toList(),
@@ -507,10 +505,16 @@ class _CompOrdemManutencaoWidgetState extends State<CompOrdemManutencaoWidget> {
                                       _model.clienteProgramadorValue = val);
                                   FFAppState().updateStateSSAcompletaStruct(
                                     (e) => e
-                                      ..ssaNomeProgramadorCliente =
-                                          _model.clienteProgramadorValue
-                                      ..ssaFkIdProgramadorCliente = _model
-                                          .outSolicitante
+                                      ..ssaNomeProgramadorCliente = widget
+                                          .rowSolicitante
+                                          ?.where((e) =>
+                                              e.nome ==
+                                              _model.clienteProgramadorValue)
+                                          .toList()
+                                          .firstOrNull
+                                          ?.nome
+                                      ..ssaFkIdProgramadorCliente = widget
+                                          .rowSolicitante
                                           ?.where((e) =>
                                               e.nome ==
                                               _model.clienteProgramadorValue)

@@ -123,6 +123,7 @@ class _UiVisitaTecnicaWidgetState extends State<UiVisitaTecnicaWidget> {
                           .map((m) => FFUploadedFile(
                                 name: m.storagePath.split('/').last,
                                 bytes: m.bytes,
+                                originalFilename: m.originalFilename,
                               ))
                           .toList();
                     } finally {
@@ -143,7 +144,9 @@ class _UiVisitaTecnicaWidgetState extends State<UiVisitaTecnicaWidget> {
                   safeSetState(() {
                     _model.isDataUploading_croquiUploadData023 = false;
                     _model.uploadedLocalFile_croquiUploadData023 =
-                        FFUploadedFile(bytes: Uint8List.fromList([]));
+                        FFUploadedFile(
+                            bytes: Uint8List.fromList([]),
+                            originalFilename: '');
                   });
                 },
               ),

@@ -31,10 +31,7 @@ class ListaPecasExecucaoRow extends SupabaseDataRow {
   set quantidadeReservada(int value) =>
       setField<int>('quantidade_reservada', value);
 
-  int? get materialSubstituido => getField<int>('material_substituido');
-  set materialSubstituido(int? value) =>
-      setField<int>('material_substituido', value);
-
-  String? get observacao => getField<String>('observacao');
-  set observacao(String? value) => setField<String>('observacao', value);
+  int? get preenchimentoDiarioFk => getField<int>('preenchimento_diario_fk');
+  set preenchimentoDiarioFk(int? value) =>
+      setField<int>('preenchimento_diario_fk', value);
 }

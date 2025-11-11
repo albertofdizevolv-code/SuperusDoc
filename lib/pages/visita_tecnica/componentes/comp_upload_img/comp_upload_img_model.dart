@@ -7,7 +7,7 @@ class CompUploadImgModel extends FlutterFlowModel<CompUploadImgWidget> {
 
   bool isDataUploading_arquivoFFUploadData24f = false;
   FFUploadedFile uploadedLocalFile_arquivoFFUploadData24f =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
+      FFUploadedFile(bytes: Uint8List.fromList([]), originalFilename: '');
   String uploadedFileUrl_arquivoFFUploadData24f = '';
 
   @override

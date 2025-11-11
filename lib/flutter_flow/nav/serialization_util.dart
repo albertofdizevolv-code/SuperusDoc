@@ -234,8 +234,6 @@ dynamic deserializeParam<T>(
             return MedicaoRow(data);
           case ProgramacaoVisitaRow:
             return ProgramacaoVisitaRow(data);
-          case VwProgramacaoDetalhesRow:
-            return VwProgramacaoDetalhesRow(data);
           case StatusSSARow:
             return StatusSSARow(data);
           case MaterialRow:
@@ -272,8 +270,6 @@ dynamic deserializeParam<T>(
             return RecolhimentoMaterialRow(data);
           case VwEquipeVisitaDetalhesRow:
             return VwEquipeVisitaDetalhesRow(data);
-          case VwSsaDetalhesRow:
-            return VwSsaDetalhesRow(data);
           case EstoqueRow:
             return EstoqueRow(data);
           case ProjetoRow:
@@ -292,8 +288,6 @@ dynamic deserializeParam<T>(
             return TrechosExecucaoRow(data);
           case ExecucaoRow:
             return ExecucaoRow(data);
-          case VwProgramacaoCompletaRow:
-            return VwProgramacaoCompletaRow(data);
           case EquipeExecucaoRow:
             return EquipeExecucaoRow(data);
           case FuncionariosRow:
@@ -308,8 +302,6 @@ dynamic deserializeParam<T>(
             return AprovacaoRow(data);
           case ExecucaoMontagemDiariaRow:
             return ExecucaoMontagemDiariaRow(data);
-          case VwVisitaTecnicaCompletaRow:
-            return VwVisitaTecnicaCompletaRow(data);
           case VisitaTecnicaCategoriasRow:
             return VisitaTecnicaCategoriasRow(data);
           case ListaPecasVTRow:

@@ -8,29 +8,43 @@ import '/flutter_flow/flutter_flow_util.dart';
 /// Dados efetivo da Programação
 class FmDadosEfetivoStruct extends BaseStruct {
   FmDadosEfetivoStruct({
-    int? fkIdUser,
+    int? id,
+    int? fkPreenchimentoDiaria,
     int? fkInterno,
+    int? fkIdUser,
     String? nome,
     String? funcao,
     DateTime? horarioInicio,
     DateTime? horaTermino,
     double? horasTotais,
-  })  : _fkIdUser = fkIdUser,
+  })  : _id = id,
+        _fkPreenchimentoDiaria = fkPreenchimentoDiaria,
         _fkInterno = fkInterno,
+        _fkIdUser = fkIdUser,
         _nome = nome,
         _funcao = funcao,
         _horarioInicio = horarioInicio,
         _horaTermino = horaTermino,
         _horasTotais = horasTotais;
 
-  // "fk_id_user" field.
-  int? _fkIdUser;
-  int get fkIdUser => _fkIdUser ?? 0;
-  set fkIdUser(int? val) => _fkIdUser = val;
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
-  void incrementFkIdUser(int amount) => fkIdUser = fkIdUser + amount;
+  void incrementId(int amount) => id = id + amount;
 
-  bool hasFkIdUser() => _fkIdUser != null;
+  bool hasId() => _id != null;
+
+  // "fk_preenchimento_diaria" field.
+  int? _fkPreenchimentoDiaria;
+  int get fkPreenchimentoDiaria => _fkPreenchimentoDiaria ?? 0;
+  set fkPreenchimentoDiaria(int? val) => _fkPreenchimentoDiaria = val;
+
+  void incrementFkPreenchimentoDiaria(int amount) =>
+      fkPreenchimentoDiaria = fkPreenchimentoDiaria + amount;
+
+  bool hasFkPreenchimentoDiaria() => _fkPreenchimentoDiaria != null;
 
   // "fk_interno" field.
   int? _fkInterno;
@@ -40,6 +54,15 @@ class FmDadosEfetivoStruct extends BaseStruct {
   void incrementFkInterno(int amount) => fkInterno = fkInterno + amount;
 
   bool hasFkInterno() => _fkInterno != null;
+
+  // "fk_id_user" field.
+  int? _fkIdUser;
+  int get fkIdUser => _fkIdUser ?? 0;
+  set fkIdUser(int? val) => _fkIdUser = val;
+
+  void incrementFkIdUser(int amount) => fkIdUser = fkIdUser + amount;
+
+  bool hasFkIdUser() => _fkIdUser != null;
 
   // "Nome" field.
   String? _nome;
@@ -81,8 +104,10 @@ class FmDadosEfetivoStruct extends BaseStruct {
 
   static FmDadosEfetivoStruct fromMap(Map<String, dynamic> data) =>
       FmDadosEfetivoStruct(
-        fkIdUser: castToType<int>(data['fk_id_user']),
+        id: castToType<int>(data['id']),
+        fkPreenchimentoDiaria: castToType<int>(data['fk_preenchimento_diaria']),
         fkInterno: castToType<int>(data['fk_interno']),
+        fkIdUser: castToType<int>(data['fk_id_user']),
         nome: data['Nome'] as String?,
         funcao: data['Funcao'] as String?,
         horarioInicio: data['horarioInicio'] as DateTime?,
@@ -95,8 +120,10 @@ class FmDadosEfetivoStruct extends BaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'fk_id_user': _fkIdUser,
+        'id': _id,
+        'fk_preenchimento_diaria': _fkPreenchimentoDiaria,
         'fk_interno': _fkInterno,
+        'fk_id_user': _fkIdUser,
         'Nome': _nome,
         'Funcao': _funcao,
         'horarioInicio': _horarioInicio,
@@ -106,12 +133,20 @@ class FmDadosEfetivoStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'fk_id_user': serializeParam(
-          _fkIdUser,
+        'id': serializeParam(
+          _id,
+          ParamType.int,
+        ),
+        'fk_preenchimento_diaria': serializeParam(
+          _fkPreenchimentoDiaria,
           ParamType.int,
         ),
         'fk_interno': serializeParam(
           _fkInterno,
+          ParamType.int,
+        ),
+        'fk_id_user': serializeParam(
+          _fkIdUser,
           ParamType.int,
         ),
         'Nome': serializeParam(
@@ -138,13 +173,23 @@ class FmDadosEfetivoStruct extends BaseStruct {
 
   static FmDadosEfetivoStruct fromSerializableMap(Map<String, dynamic> data) =>
       FmDadosEfetivoStruct(
-        fkIdUser: deserializeParam(
-          data['fk_id_user'],
+        id: deserializeParam(
+          data['id'],
+          ParamType.int,
+          false,
+        ),
+        fkPreenchimentoDiaria: deserializeParam(
+          data['fk_preenchimento_diaria'],
           ParamType.int,
           false,
         ),
         fkInterno: deserializeParam(
           data['fk_interno'],
+          ParamType.int,
+          false,
+        ),
+        fkIdUser: deserializeParam(
+          data['fk_id_user'],
           ParamType.int,
           false,
         ),
@@ -181,8 +226,10 @@ class FmDadosEfetivoStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is FmDadosEfetivoStruct &&
-        fkIdUser == other.fkIdUser &&
+        id == other.id &&
+        fkPreenchimentoDiaria == other.fkPreenchimentoDiaria &&
         fkInterno == other.fkInterno &&
+        fkIdUser == other.fkIdUser &&
         nome == other.nome &&
         funcao == other.funcao &&
         horarioInicio == other.horarioInicio &&
@@ -192,8 +239,10 @@ class FmDadosEfetivoStruct extends BaseStruct {
 
   @override
   int get hashCode => const ListEquality().hash([
-        fkIdUser,
+        id,
+        fkPreenchimentoDiaria,
         fkInterno,
+        fkIdUser,
         nome,
         funcao,
         horarioInicio,
@@ -203,8 +252,10 @@ class FmDadosEfetivoStruct extends BaseStruct {
 }
 
 FmDadosEfetivoStruct createFmDadosEfetivoStruct({
-  int? fkIdUser,
+  int? id,
+  int? fkPreenchimentoDiaria,
   int? fkInterno,
+  int? fkIdUser,
   String? nome,
   String? funcao,
   DateTime? horarioInicio,
@@ -212,8 +263,10 @@ FmDadosEfetivoStruct createFmDadosEfetivoStruct({
   double? horasTotais,
 }) =>
     FmDadosEfetivoStruct(
-      fkIdUser: fkIdUser,
+      id: id,
+      fkPreenchimentoDiaria: fkPreenchimentoDiaria,
       fkInterno: fkInterno,
+      fkIdUser: fkIdUser,
       nome: nome,
       funcao: funcao,
       horarioInicio: horarioInicio,

@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class FmInterferenciaExecucaoStruct extends BaseStruct {
   FmInterferenciaExecucaoStruct({
-    int? idInterferencia,
+    int? id,
     int? fkInterno,
     int? fkMotivo,
     String? descricao,
@@ -15,7 +15,7 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
     int? efetivoAfetado,
     double? impactoHora,
     String? motivo,
-  })  : _idInterferencia = idInterferencia,
+  })  : _id = id,
         _fkInterno = fkInterno,
         _fkMotivo = fkMotivo,
         _descricao = descricao,
@@ -24,15 +24,14 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
         _impactoHora = impactoHora,
         _motivo = motivo;
 
-  // "id_interferencia" field.
-  int? _idInterferencia;
-  int get idInterferencia => _idInterferencia ?? 0;
-  set idInterferencia(int? val) => _idInterferencia = val;
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
-  void incrementIdInterferencia(int amount) =>
-      idInterferencia = idInterferencia + amount;
+  void incrementId(int amount) => id = id + amount;
 
-  bool hasIdInterferencia() => _idInterferencia != null;
+  bool hasId() => _id != null;
 
   // "fk_interno" field.
   int? _fkInterno;
@@ -97,7 +96,7 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
 
   static FmInterferenciaExecucaoStruct fromMap(Map<String, dynamic> data) =>
       FmInterferenciaExecucaoStruct(
-        idInterferencia: castToType<int>(data['id_interferencia']),
+        id: castToType<int>(data['id']),
         fkInterno: castToType<int>(data['fk_interno']),
         fkMotivo: castToType<int>(data['fk_motivo']),
         descricao: data['descricao'] as String?,
@@ -113,7 +112,7 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
           : null;
 
   Map<String, dynamic> toMap() => {
-        'id_interferencia': _idInterferencia,
+        'id': _id,
         'fk_interno': _fkInterno,
         'fk_motivo': _fkMotivo,
         'descricao': _descricao,
@@ -125,8 +124,8 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'id_interferencia': serializeParam(
-          _idInterferencia,
+        'id': serializeParam(
+          _id,
           ParamType.int,
         ),
         'fk_interno': serializeParam(
@@ -162,8 +161,8 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
   static FmInterferenciaExecucaoStruct fromSerializableMap(
           Map<String, dynamic> data) =>
       FmInterferenciaExecucaoStruct(
-        idInterferencia: deserializeParam(
-          data['id_interferencia'],
+        id: deserializeParam(
+          data['id'],
           ParamType.int,
           false,
         ),
@@ -210,7 +209,7 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is FmInterferenciaExecucaoStruct &&
-        idInterferencia == other.idInterferencia &&
+        id == other.id &&
         fkInterno == other.fkInterno &&
         fkMotivo == other.fkMotivo &&
         descricao == other.descricao &&
@@ -222,7 +221,7 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
 
   @override
   int get hashCode => const ListEquality().hash([
-        idInterferencia,
+        id,
         fkInterno,
         fkMotivo,
         descricao,
@@ -234,7 +233,7 @@ class FmInterferenciaExecucaoStruct extends BaseStruct {
 }
 
 FmInterferenciaExecucaoStruct createFmInterferenciaExecucaoStruct({
-  int? idInterferencia,
+  int? id,
   int? fkInterno,
   int? fkMotivo,
   String? descricao,
@@ -244,7 +243,7 @@ FmInterferenciaExecucaoStruct createFmInterferenciaExecucaoStruct({
   String? motivo,
 }) =>
     FmInterferenciaExecucaoStruct(
-      idInterferencia: idInterferencia,
+      id: id,
       fkInterno: fkInterno,
       fkMotivo: fkMotivo,
       descricao: descricao,

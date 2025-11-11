@@ -33,4 +33,19 @@ class VwHistoricoCompletoRow extends SupabaseDataRow {
   String? get nomeResponsavel => getField<String>('nome_responsavel');
   set nomeResponsavel(String? value) =>
       setField<String>('nome_responsavel', value);
+
+  int? get fkIdStatusHistorico => getField<int>('fk_id_status_historico');
+  set fkIdStatusHistorico(int? value) =>
+      setField<int>('fk_id_status_historico', value);
+
+  String? get nomeStatusHistorico => getField<String>('nome_status_historico');
+  set nomeStatusHistorico(String? value) =>
+      setField<String>('nome_status_historico', value);
+
+  int? get fkIdStatusAtual => getField<int>('fk_id_status_atual');
+  set fkIdStatusAtual(int? value) => setField<int>('fk_id_status_atual', value);
+
+  String? get nomeStatusAtual => getField<String>('nome_status_atual');
+  set nomeStatusAtual(String? value) =>
+      setField<String>('nome_status_atual', value);
 }

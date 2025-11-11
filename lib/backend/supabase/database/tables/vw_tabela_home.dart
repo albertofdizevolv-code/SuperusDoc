@@ -17,6 +17,10 @@ class VwTabelaHomeRow extends SupabaseDataRow {
   int? get idSsa => getField<int>('id_ssa');
   set idSsa(int? value) => setField<int>('id_ssa', value);
 
+  String? get codIdentificador => getField<String>('cod_identificador');
+  set codIdentificador(String? value) =>
+      setField<String>('cod_identificador', value);
+
   String? get numeroOs => getField<String>('numero_os');
   set numeroOs(String? value) => setField<String>('numero_os', value);
 

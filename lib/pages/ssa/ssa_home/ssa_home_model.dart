@@ -1,5 +1,5 @@
 import '/backend/supabase/supabase.dart';
-import '/flutter_flow/flutter_flow_data_table.dart';
+import '/components/tabela_home_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/global_components/headtitle_button/headtitle_button_widget.dart';
 import '/global_components/select_drop_down_projeto/select_drop_down_projeto_widget.dart';
@@ -39,8 +39,8 @@ class SsaHomeModel extends FlutterFlowModel<SsaHomeWidget> {
   late FilterOptionsPanelModel filterOptionsPanelModel;
   // Stores action output result for [Backend Call - Query Rows] action in Button widget.
   List<FuncionariosRow>? outFuncinario;
-  // State field(s) for Nova widget.
-  final novaController = FlutterFlowDataTableController<VwTabelaHomeRow>();
+  // Model for tabela_home component.
+  late TabelaHomeModel tabelaHomeModel;
 
   @override
   void initState(BuildContext context) {
@@ -51,6 +51,7 @@ class SsaHomeModel extends FlutterFlowModel<SsaHomeWidget> {
         createModel(context, () => SelectDropDownProjetoModel());
     filterOptionsPanelModel =
         createModel(context, () => FilterOptionsPanelModel());
+    tabelaHomeModel = createModel(context, () => TabelaHomeModel());
   }
 
   @override
@@ -59,6 +60,6 @@ class SsaHomeModel extends FlutterFlowModel<SsaHomeWidget> {
     headtitleButtonModel.dispose();
     selectDropDownProjetoModel.dispose();
     filterOptionsPanelModel.dispose();
-    novaController.dispose();
+    tabelaHomeModel.dispose();
   }
 }

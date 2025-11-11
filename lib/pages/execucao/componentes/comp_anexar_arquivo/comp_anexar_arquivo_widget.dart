@@ -142,8 +142,8 @@ class _CompAnexarArquivoWidgetState extends State<CompAnexarArquivoWidget> {
                                               false;
                                           _model.uploadedLocalFile_uploadDataClq =
                                               FFUploadedFile(
-                                                  bytes:
-                                                      Uint8List.fromList([]));
+                                                  bytes: Uint8List.fromList([]),
+                                                  originalFilename: '');
                                         });
                                       },
                                       text: 'Remover arquivo',
@@ -252,6 +252,8 @@ class _CompAnexarArquivoWidgetState extends State<CompAnexarArquivoWidget> {
                                                                     .split('/')
                                                                     .last,
                                                                 bytes: m.bytes,
+                                                                originalFilename:
+                                                                    m.originalFilename,
                                                               ))
                                                       .toList();
                                             } finally {

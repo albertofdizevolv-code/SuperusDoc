@@ -1,8 +1,10 @@
 import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/global_components/toast_with_temp/toast_with_temp_widget.dart';
 import '/pages/execucao/componentes/comp_anexar_arquivo/comp_anexar_arquivo_widget.dart';
 import '/pages/execucao/componentes/comp_captura_imagens/comp_captura_imagens_widget.dart';
 import '/pages/execucao/componentes/comp_interferencia/comp_interferencia_widget.dart';
@@ -10,12 +12,14 @@ import '/pages/execucao/componentes/comp_lista_pecas_ex/comp_lista_pecas_ex_widg
 import '/pages/execucao/componentes/comp_nivel_piso_ex/comp_nivel_piso_ex_widget.dart';
 import '/pages/execucao/componentes/comp_step_rounded/comp_step_rounded_widget.dart';
 import '/pages/execucao/componentes/comp_trecho_ex/comp_trecho_ex_widget.dart';
+import '/pages/execucao/componentes/comp_upload_img_list/comp_upload_img_list_widget.dart';
 import '/pages/execucao/componentes/modal_interferencias/modal_interferencias_widget.dart';
 import '/pages/execucao/componentes/modal_nivel_piso_ex/modal_nivel_piso_ex_widget.dart';
 import '/pages/execucao/componentes/modal_trecho_ex/modal_trecho_ex_widget.dart';
 import '/pages/programacao/components/comp_dadosdo_efetivo/comp_dadosdo_efetivo_widget.dart';
 import '/pages/programacao/components/modal_dados_efetivo/modal_dados_efetivo_widget.dart';
 import '/pages/ssa/componentes/comp_obs_geraisda_s_s_a/comp_obs_geraisda_s_s_a_widget.dart';
+import '/pages/visita_tecnica/componentes/comp_upload_img/comp_upload_img_widget.dart';
 import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -31,14 +35,13 @@ class UIFormPreenchimentoWidget extends StatefulWidget {
     required this.typemode,
     required this.fkid,
     this.index,
-    this.uploaded,
-  });
+    bool? primeiroDia,
+  }) : this.primeiroDia = primeiroDia ?? false;
 
   final WidgetTypeMode? typemode;
   final int? fkid;
   final int? index;
-  final Future Function(List<FFUploadedFile> imgAntes,
-      List<FFUploadedFile> imgDepois, FFUploadedFile anexo)? uploaded;
+  final bool primeiroDia;
 
   @override
   State<UIFormPreenchimentoWidget> createState() =>
@@ -2036,79 +2039,245 @@ class _UIFormPreenchimentoWidgetState extends State<UIFormPreenchimentoWidget> {
                         ),
                       if ((_model.statusPageComponent == 10) &&
                           (widget.typemode == WidgetTypeMode.create))
-                        FFButtonWidget(
-                          onPressed: () async {
-                            await _model.addTrecho(
-                              context,
-                              typemodeInBlock: WidgetTypeMode.create,
-                            );
-                            await _model.addPiso(
-                              context,
-                              typemodeInBlock: WidgetTypeMode.create,
-                            );
-                            await _model.addEfetivo(
-                              context,
-                              typemodeInBlock: WidgetTypeMode.create,
-                            );
-                            await _model.addListaPecas(
-                              context,
-                              typemodeInBlock: WidgetTypeMode.create,
-                            );
-                            await _model.addInterferencias(
-                              context,
-                              typemodeInBlock: WidgetTypeMode.create,
-                            );
-                            FFAppState().updateStateSSAcompletaStruct(
-                              (e) => e
-                                ..updateExPreenchimentoDiariaMontagem(
-                                  (e) => e.add(FmPreenchimentoExecucaoStruct(
-                                    fkInterno: widget.fkid,
-                                    dataPreenchimento: _model.datePicked,
-                                    exCondicoesObs: _model
-                                        .compObsGeraisdaSSAModel
-                                        .observacoesGeraisSSATextController
-                                        .text,
-                                  )),
-                                ),
-                            );
-                            FFAppState().update(() {});
-                            Navigator.pop(context);
-                            await widget.uploaded?.call(
-                              _model.compCapturaImagensAntgasModel
-                                  .uploadedLocalFiles_uploadDataPe9,
-                              _model.compCapturaImagensDepoisModel
-                                  .uploadedLocalFiles_uploadDataPe9,
-                              _model.compAnexarArquivoModel
-                                  .uploadedLocalFile_uploadDataClq,
-                            );
-                          },
-                          text: 'Confirmar',
-                          options: FFButtonOptions(
-                            width: 200.0,
-                            height: 48.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  font: GoogleFonts.inter(
+                        Builder(
+                          builder: (context) => FFButtonWidget(
+                            onPressed: () async {
+                              if (widget.primeiroDia == true) {
+                                _model.outNewExecucao =
+                                    await ExecucaoTable().insert({
+                                  'fk_id_ssa':
+                                      FFAppState().stateSSAcompleta.fkIdSsa,
+                                  'fk_id_responsavel_superus':
+                                      FFAppState().usuarioLogado.id,
+                                  'data_inicio_montagem':
+                                      supaSerialize<DateTime>(
+                                          _model.datePicked),
+                                });
+                                // GET ID EXECUTION
+                                FFAppState().updateStateSSAcompletaStruct(
+                                  (e) => e
+                                    ..fkIdExecucao =
+                                        _model.outNewExecucao?.idExecucao,
+                                );
+                                safeSetState(() {});
+                              }
+                              // Imgs Antias
+                              await showDialog(
+                                context: context,
+                                builder: (dialogContext) {
+                                  return Dialog(
+                                    elevation: 0,
+                                    insetPadding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    alignment: AlignmentDirectional(0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
+                                    child: CompUploadImgListWidget(
+                                      pathBucket: PathBucket.fotos,
+                                      arquivo: _model
+                                          .compCapturaImagensAntgasModel
+                                          .uploadedLocalFiles_uploadDataPe9,
+                                      url: (url) async {
+                                        FFAppState()
+                                            .updateStateSSAcompletaStruct(
+                                          (e) => e
+                                            ..updateExPreenchimentoDiariaMontagem(
+                                              (e) => e.add(
+                                                  FmPreenchimentoExecucaoStruct(
+                                                exCapturaFotosAntigas: url,
+                                              )),
+                                            ),
+                                        );
+                                        safeSetState(() {});
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+
+                              // Imgs Novas
+                              await showDialog(
+                                context: context,
+                                builder: (dialogContext) {
+                                  return Dialog(
+                                    elevation: 0,
+                                    insetPadding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    alignment: AlignmentDirectional(0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
+                                    child: CompUploadImgListWidget(
+                                      pathBucket: PathBucket.fotos,
+                                      arquivo: _model
+                                          .compCapturaImagensDepoisModel
+                                          .uploadedLocalFiles_uploadDataPe9,
+                                      url: (url) async {
+                                        FFAppState()
+                                            .updateStateSSAcompletaStruct(
+                                          (e) => e
+                                            ..updateExPreenchimentoDiariaMontagem(
+                                              (e) => e.add(
+                                                  FmPreenchimentoExecucaoStruct(
+                                                exCapturaFotosNovas: url,
+                                              )),
+                                            ),
+                                        );
+                                        safeSetState(() {});
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+
+                              await showDialog(
+                                context: context,
+                                builder: (dialogContext) {
+                                  return Dialog(
+                                    elevation: 0,
+                                    insetPadding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    alignment: AlignmentDirectional(0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
+                                    child: ToastWithTempWidget(
+                                      type: Toast.success,
+                                      text: 'Dia cadastrado',
+                                      timeLoading: TimeLoading.temp8seconds,
+                                    ),
+                                  );
+                                },
+                              );
+
+                              // Anexo
+                              await showDialog(
+                                context: context,
+                                builder: (dialogContext) {
+                                  return Dialog(
+                                    elevation: 0,
+                                    insetPadding: EdgeInsets.zero,
+                                    backgroundColor: Colors.transparent,
+                                    alignment: AlignmentDirectional(0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
+                                    child: CompUploadImgWidget(
+                                      pathBucket: PathBucket.croqui,
+                                      arquivo: _model.compAnexarArquivoModel
+                                          .uploadedLocalFile_uploadDataClq,
+                                      url: (url) async {
+                                        FFAppState()
+                                            .updateStateSSAcompletaStruct(
+                                          (e) => e
+                                            ..updateExPreenchimentoDiariaMontagem(
+                                              (e) => e.add(
+                                                  FmPreenchimentoExecucaoStruct(
+                                                exAssinaturaSuperusUrl: url,
+                                              )),
+                                            ),
+                                        );
+                                        safeSetState(() {});
+                                      },
+                                    ),
+                                  );
+                                },
+                              );
+
+                              _model.outMontagemDiario =
+                                  await ExecucaoMontagemDiariaTable().insert({
+                                'created_at': supaSerialize<DateTime>(
+                                    getCurrentTimestamp),
+                                'fk_execucao':
+                                    FFAppState().stateSSAcompleta.fkIdExecucao,
+                                'data_execucao':
+                                    supaSerialize<DateTime>(_model.datePicked),
+                                'responsavel_ref':
+                                    FFAppState().usuarioLogado.id,
+                                'observacoes': _model.compObsGeraisdaSSAModel
+                                    .observacoesGeraisSSATextController.text,
+                                'fotos_antigas_url': FFAppState()
+                                    .stateSSAcompleta
+                                    .exPreenchimentoDiariaMontagem
+                                    .map((e) =>
+                                        e.exCapturaFotosAntigas.firstOrNull)
+                                    .withoutNulls
+                                    .toList(),
+                                'fotos_novas_url': FFAppState()
+                                    .stateSSAcompleta
+                                    .exPreenchimentoDiariaMontagem
+                                    .map((e) =>
+                                        e.exCapturaFotosNovas.firstOrNull)
+                                    .withoutNulls
+                                    .toList(),
+                                'anexos_url': FFAppState()
+                                    .stateSSAcompleta
+                                    .exPreenchimentoDiariaMontagem
+                                    .firstOrNull
+                                    ?.exArquivosAnexo,
+                              });
+                              FFAppState().updateStateSSAcompletaStruct(
+                                (e) => e
+                                  ..updateExPreenchimentoDiariaMontagem(
+                                    (e) => e.add(FmPreenchimentoExecucaoStruct(
+                                      fkInterno: widget.fkid,
+                                      dataPreenchimento: _model.datePicked,
+                                      exCondicoesObs: _model
+                                          .compObsGeraisdaSSAModel
+                                          .observacoesGeraisSSATextController
+                                          .text,
+                                      salvodb: false,
+                                      id: _model
+                                          .outMontagemDiario?.idExecucaoDiaria,
+                                    )),
+                                  ),
+                              );
+                              FFAppState().update(() {});
+                              await _model.addTrecho(
+                                context,
+                                typemodeInBlock: WidgetTypeMode.create,
+                              );
+                              await _model.addPiso(
+                                context,
+                                typemodeInBlock: WidgetTypeMode.create,
+                              );
+                              await _model.addEfetivo(
+                                context,
+                                typemodeInBlock: WidgetTypeMode.create,
+                              );
+                              await _model.addListaPecas(
+                                context,
+                                typemodeInBlock: WidgetTypeMode.create,
+                              );
+                              await _model.addInterferencias(
+                                context,
+                                typemodeInBlock: WidgetTypeMode.create,
+                              );
+                              Navigator.pop(context);
+
+                              safeSetState(() {});
+                            },
+                            text: 'Confirmar',
+                            options: FFButtonOptions(
+                              width: 200.0,
+                              height: 48.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
+                                    color: FlutterFlowTheme.of(context).info,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.normal,
                                     fontStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .fontStyle,
                                   ),
-                                  color: FlutterFlowTheme.of(context).info,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.normal,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontStyle,
-                                ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8.0),
+                              elevation: 0.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                           ),
                         ),
                       if (_model.statusPageComponent != 10)

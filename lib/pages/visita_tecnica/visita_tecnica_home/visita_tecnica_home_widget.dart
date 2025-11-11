@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/global_components/headtitle_button/headtitle_button_widget.dart';
+import '/global_components/list_empty/list_empty_widget.dart';
 import '/global_components/side_bar_menu_principal/side_bar_menu_principal_widget.dart';
 import '/actions/actions.dart' as action_blocks;
 import '/index.dart';
@@ -132,6 +133,13 @@ class _VisitaTecnicaHomeWidgetState extends State<VisitaTecnicaHomeWidget> {
                                         final ter =
                                             visitaTecnicaHomeVwTabelaHomeRowList
                                                 .toList();
+                                        if (ter.isEmpty) {
+                                          return ListEmptyWidget(
+                                            title: 'Nenhuma visita pendente',
+                                            description:
+                                                'Você não possui visitas tecnicas pendentes.',
+                                          );
+                                        }
 
                                         return FlutterFlowDataTable<
                                             VwTabelaHomeRow>(
@@ -538,7 +546,7 @@ class _VisitaTecnicaHomeWidgetState extends State<VisitaTecnicaHomeWidget> {
                                                 children: [
                                                   Text(
                                                     valueOrDefault<String>(
-                                                      terItem.numeroOs,
+                                                      terItem.codIdentificador,
                                                       '0',
                                                     ),
                                                     style: FlutterFlowTheme.of(
@@ -910,6 +918,11 @@ class _VisitaTecnicaHomeWidgetState extends State<VisitaTecnicaHomeWidget> {
                                                 ].divide(SizedBox(width: 4.0)),
                                               ),
                                             ].map((c) => DataCell(c)).toList(),
+                                          ),
+                                          emptyBuilder: () => ListEmptyWidget(
+                                            title: 'Nenhuma visita pendente',
+                                            description:
+                                                'Você não possui visitas tecnicas pendentes.',
                                           ),
                                           paginated: true,
                                           selectable: false,

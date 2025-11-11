@@ -108,7 +108,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   /// Informação é exibida no sidebar
-  String _UltimaAtualizacao = '15/10 -15:00';
+  String _UltimaAtualizacao = '08/11 -16:35';
   String get UltimaAtualizacao => _UltimaAtualizacao;
   set UltimaAtualizacao(String value) {
     _UltimaAtualizacao = value;

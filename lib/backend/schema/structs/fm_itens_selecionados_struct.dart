@@ -8,25 +8,25 @@ import '/flutter_flow/flutter_flow_util.dart';
 /// vt = Visita tecnica
 class FmItensSelecionadosStruct extends BaseStruct {
   FmItensSelecionadosStruct({
-    int? idSelecao,
+    int? id,
     int? fkInterno,
     int? fkIdVisita,
 
     /// O que realmente importa
     int? fkIdItem,
-  })  : _idSelecao = idSelecao,
+  })  : _id = id,
         _fkInterno = fkInterno,
         _fkIdVisita = fkIdVisita,
         _fkIdItem = fkIdItem;
 
-  // "id_selecao" field.
-  int? _idSelecao;
-  int get idSelecao => _idSelecao ?? 0;
-  set idSelecao(int? val) => _idSelecao = val;
+  // "id" field.
+  int? _id;
+  int get id => _id ?? 0;
+  set id(int? val) => _id = val;
 
-  void incrementIdSelecao(int amount) => idSelecao = idSelecao + amount;
+  void incrementId(int amount) => id = id + amount;
 
-  bool hasIdSelecao() => _idSelecao != null;
+  bool hasId() => _id != null;
 
   // "fk_interno" field.
   int? _fkInterno;
@@ -57,7 +57,7 @@ class FmItensSelecionadosStruct extends BaseStruct {
 
   static FmItensSelecionadosStruct fromMap(Map<String, dynamic> data) =>
       FmItensSelecionadosStruct(
-        idSelecao: castToType<int>(data['id_selecao']),
+        id: castToType<int>(data['id']),
         fkInterno: castToType<int>(data['fk_interno']),
         fkIdVisita: castToType<int>(data['fk_id_visita']),
         fkIdItem: castToType<int>(data['fk_id_item']),
@@ -68,7 +68,7 @@ class FmItensSelecionadosStruct extends BaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'id_selecao': _idSelecao,
+        'id': _id,
         'fk_interno': _fkInterno,
         'fk_id_visita': _fkIdVisita,
         'fk_id_item': _fkIdItem,
@@ -76,8 +76,8 @@ class FmItensSelecionadosStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'id_selecao': serializeParam(
-          _idSelecao,
+        'id': serializeParam(
+          _id,
           ParamType.int,
         ),
         'fk_interno': serializeParam(
@@ -97,8 +97,8 @@ class FmItensSelecionadosStruct extends BaseStruct {
   static FmItensSelecionadosStruct fromSerializableMap(
           Map<String, dynamic> data) =>
       FmItensSelecionadosStruct(
-        idSelecao: deserializeParam(
-          data['id_selecao'],
+        id: deserializeParam(
+          data['id'],
           ParamType.int,
           false,
         ),
@@ -125,7 +125,7 @@ class FmItensSelecionadosStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is FmItensSelecionadosStruct &&
-        idSelecao == other.idSelecao &&
+        id == other.id &&
         fkInterno == other.fkInterno &&
         fkIdVisita == other.fkIdVisita &&
         fkIdItem == other.fkIdItem;
@@ -133,17 +133,17 @@ class FmItensSelecionadosStruct extends BaseStruct {
 
   @override
   int get hashCode =>
-      const ListEquality().hash([idSelecao, fkInterno, fkIdVisita, fkIdItem]);
+      const ListEquality().hash([id, fkInterno, fkIdVisita, fkIdItem]);
 }
 
 FmItensSelecionadosStruct createFmItensSelecionadosStruct({
-  int? idSelecao,
+  int? id,
   int? fkInterno,
   int? fkIdVisita,
   int? fkIdItem,
 }) =>
     FmItensSelecionadosStruct(
-      idSelecao: idSelecao,
+      id: id,
       fkInterno: fkInterno,
       fkIdVisita: fkIdVisita,
       fkIdItem: fkIdItem,
